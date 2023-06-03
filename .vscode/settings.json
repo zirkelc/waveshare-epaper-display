@@ -3,5 +3,9 @@
     "python.envFile": "${workspaceFolder}/env.sh",
     "python.terminal.activateEnvironment": true,
     "python.linting.flake8Enabled": true,
-    "python.linting.enabled": true
+    "python.linting.enabled": true,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.formatting.provider": "none"
 }

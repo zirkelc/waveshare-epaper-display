@@ -4,7 +4,17 @@ import datetime
 import sys
 import os
 import logging
-from weather_providers import climacell, openweathermap, metofficedatahub, metno, meteireann, accuweather, visualcrossing, weathergov, smhi
+from weather_providers import (
+    climacell,
+    openweathermap,
+    metofficedatahub,
+    metno,
+    meteireann,
+    accuweather,
+    visualcrossing,
+    weathergov,
+    smhi,
+)
 from alert_providers import metofficerssfeed, weathergovalerts
 from alert_providers import meteireann as meteireannalertprovider
 from utility import get_formatted_time, update_svg, configure_logging, configure_locale
@@ -17,17 +27,17 @@ configure_logging()
 
 def format_weather_description(weather_description):
     if len(weather_description) < 20:
-        return {1: weather_description, 2: ''}
+        return {1: weather_description, 2: ""}
 
-    splits = textwrap.fill(weather_description, 20, break_long_words=False,
-                           max_lines=2, placeholder='...').split('\n')
+    splits = textwrap.fill(
+        weather_description, 20, break_long_words=False, max_lines=2, placeholder="..."
+    ).split("\n")
     weather_dict = {1: splits[0]}
-    weather_dict[2] = splits[1] if len(splits) > 1 else ''
+    weather_dict[2] = splits[1] if len(splits) > 1 else ""
     return weather_dict
 
 
 def get_weather(location_lat, location_long, units):
-
     # gather relevant environment configs
     climacell_apikey = os.getenv("CLIMACELL_APIKEY")
     openweathermap_apikey = os.getenv("OPENWEATHERMAP_APIKEY")
@@ -52,12 +62,16 @@ def get_weather(location_lat, location_long, units):
         and not weathergov_self_id
         and not smhi_self_id
     ):
-        logging.error("No weather provider has been configured (Climacell, OpenWeatherMap, Weather.gov, MetOffice, AccuWeather, Met.no, Met Eireann, VisualCrossing...)")
+        logging.error(
+            "No weather provider has been configured (Climacell, OpenWeatherMap, Weather.gov, MetOffice, AccuWeather, Met.no, Met Eireann, VisualCrossing...)"
+        )
         sys.exit(1)
 
     if visualcrossing_apikey:
         logging.info("Getting weather from Visual Crossing")
-        weather_provider = visualcrossing.VisualCrossing(visualcrossing_apikey, location_lat, location_long, units)
+        weather_provider = visualcrossing.VisualCrossing(
+            visualcrossing_apikey, location_lat, location_long, units
+        )
 
     elif use_met_eireann:
         logging.info("Getting weather from Met Eireann")
@@ -65,37 +79,47 @@ def get_weather(location_lat, location_long, units):
 
     elif weathergov_self_id:
         logging.info("Getting weather from Weather.gov")
-        weather_provider = weathergov.WeatherGov(weathergov_self_id, location_lat, location_long, units)
+        weather_provider = weathergov.WeatherGov(
+            weathergov_self_id, location_lat, location_long, units
+        )
 
     elif metno_self_id:
         logging.info("Getting weather from Met.no")
-        weather_provider = metno.MetNo(metno_self_id, location_lat, location_long, units)
+        weather_provider = metno.MetNo(
+            metno_self_id, location_lat, location_long, units
+        )
 
     elif accuweather_apikey:
         logging.info("Getting weather from Accuweather")
-        weather_provider = accuweather.AccuWeather(accuweather_apikey, location_lat,
-                                                   location_long,
-                                                   accuweather_locationkey,
-                                                   units)
+        weather_provider = accuweather.AccuWeather(
+            accuweather_apikey,
+            location_lat,
+            location_long,
+            accuweather_locationkey,
+            units,
+        )
 
     elif metoffice_clientid:
         logging.info("Getting weather from Met Office Weather Datahub")
-        weather_provider = metofficedatahub.MetOffice(metoffice_clientid,
-                                                      metoffice_clientsecret,
-                                                      location_lat,
-                                                      location_long,
-                                                      units)
+        weather_provider = metofficedatahub.MetOffice(
+            metoffice_clientid,
+            metoffice_clientsecret,
+            location_lat,
+            location_long,
+            units,
+        )
 
     elif openweathermap_apikey:
         logging.info("Getting weather from OpenWeatherMap")
-        weather_provider = openweathermap.OpenWeatherMap(openweathermap_apikey,
-                                                         location_lat,
-                                                         location_long,
-                                                         units)
+        weather_provider = openweathermap.OpenWeatherMap(
+            openweathermap_apikey, location_lat, location_long, units
+        )
 
     elif climacell_apikey:
         logging.info("Getting weather from Climacell")
-        weather_provider = climacell.Climacell(climacell_apikey, location_lat, location_long, units)
+        weather_provider = climacell.Climacell(
+            climacell_apikey, location_lat, location_long, units
+        )
 
     elif smhi_self_id:
         logging.info("Getting weather from SMHI")
@@ -118,7 +142,9 @@ def get_alert_message(location_lat, location_long):
 
     if alert_weathergov_self_id:
         logging.info("Getting weather alert from Weather.gov API")
-        alert_provider = weathergovalerts.WeatherGovAlerts(location_lat, location_long, alert_weathergov_self_id)
+        alert_provider = weathergovalerts.WeatherGovAlerts(
+            location_lat, location_long, alert_weathergov_self_id
+        )
         alert_message = alert_provider.get_alert()
 
     elif alert_metoffice_feed_url:
@@ -128,7 +154,9 @@ def get_alert_message(location_lat, location_long):
 
     elif alert_meteireann_feed_url:
         logging.info("Getting weather alert from Met Eireann")
-        alert_provider = meteireannalertprovider.MetEireannAlertProvider(alert_meteireann_feed_url)
+        alert_provider = meteireannalertprovider.MetEireannAlertProvider(
+            alert_meteireann_feed_url
+        )
         alert_message = alert_provider.get_alert()
 
     logging.info("alert - {}".format(alert_message))
@@ -136,13 +164,12 @@ def get_alert_message(location_lat, location_long):
 
 
 def main():
-
     template_name = os.getenv("SCREEN_LAYOUT", "1")
     location_lat = os.getenv("WEATHER_LATITUDE", "51.5077")
     location_long = os.getenv("WEATHER_LONGITUDE", "-0.1277")
     weather_format = os.getenv("WEATHER_FORMAT", "CELSIUS")
 
-    if (weather_format == "CELSIUS"):
+    if weather_format == "CELSIUS":
         units = "metric"
         degrees = "°C"
     else:
@@ -161,32 +188,32 @@ def main():
     alert_message = format_alert_description(alert_message)
 
     time_now = get_formatted_time(datetime.datetime.now())
-    time_now_font_size = "100px"
+    time_now_font_size = "40px"
 
-    if len(time_now) > 6:
-        time_now_font_size = str(100 - (len(time_now)-5) * 5) + "px"
+    # if len(time_now) > 6:
+    #     time_now_font_size = str(100 - (len(time_now)-5) * 5) + "px"
 
     output_dict = {
-        'LOW_ONE': "{}{}".format(str(round(weather['temperatureMin'])), degrees),
-        'HIGH_ONE': "{}{}".format(str(round(weather['temperatureMax'])), degrees),
-        'ICON_ONE': weather["icon"],
-        'WEATHER_DESC_1': weather_desc[1],
-        'WEATHER_DESC_2': weather_desc[2],
-        'TIME_NOW_FONT_SIZE': time_now_font_size,
-        'TIME_NOW': time_now,
-        'HOUR_NOW': datetime.datetime.now().strftime("%-I %p"),
-        'DAY_ONE': datetime.datetime.now().strftime("%b %-d, %Y"),
-        'DAY_NAME': datetime.datetime.now().strftime("%A"),
-        'ALERT_MESSAGE_VISIBILITY': "visible" if alert_message else "hidden",
-        'ALERT_MESSAGE': alert_message
+        "LOW_ONE": "{}{}".format(str(round(weather["temperatureMin"])), degrees),
+        "HIGH_ONE": "{}{}".format(str(round(weather["temperatureMax"])), degrees),
+        "ICON_ONE": weather["icon"],
+        "WEATHER_DESC_1": weather_desc[1],
+        "WEATHER_DESC_2": weather_desc[2],
+        "TIME_NOW_FONT_SIZE": time_now_font_size,
+        "TIME_NOW": time_now,
+        "HOUR_NOW": datetime.datetime.now().strftime("%-I %p"),
+        "DAY_ONE": datetime.datetime.now().strftime("%b %-d, %Y"),
+        "DAY_NAME": datetime.datetime.now().strftime("%A"),
+        "ALERT_MESSAGE_VISIBILITY": "visible" if alert_message else "hidden",
+        "ALERT_MESSAGE": alert_message,
     }
 
     logging.info(output_dict)
 
     logging.info("Updating SVG")
 
-    template_svg_filename = f'screen-template.{template_name}.svg'
-    output_svg_filename = 'screen-output-weather.svg'
+    template_svg_filename = f"screen-template.{template_name}.svg"
+    output_svg_filename = "screen-output-weather.svg"
     update_svg(template_svg_filename, output_svg_filename, output_dict)
 
 
