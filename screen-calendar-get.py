@@ -14,9 +14,10 @@ from utility import (
     get_formatted_date,
     configure_locale,
 )
-from dotenv import load_dotenv
 
-load_dotenv()
+# from dotenv import load_dotenv
+
+# load_dotenv()
 configure_locale()
 configure_logging()
 
