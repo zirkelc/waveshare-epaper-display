@@ -75,7 +75,7 @@
       font-size="29px"
       y="132.2316"
       x="-467.73111"
-      id="text404"
+      id="calendarentry0"
       inkscape:label="calendarentry0">
       <tspan
         id="tspan400"
@@ -87,7 +87,7 @@
         font-weight="bold"
         dy="25"
         x="-467.73111"
-        inkscape:label="tspan252">CAL_DESC_0</tspan>
+        inkscape:label="tspan252"><![CDATA[CAL_DESC_0]]></tspan>
     </text>
     <text
       transform="rotate(-90.1931)"
@@ -106,7 +106,7 @@
         id="svg_2"
         font-weight="bold"
         dy="25"
-        x="-468.70486">CAL_DESC_1</tspan>
+        x="-468.70486"><![CDATA[CAL_DESC_1]]></tspan>
     </text>
     <text
       transform="rotate(-89.2376)"
@@ -125,7 +125,7 @@
         id="svg_4"
         font-weight="bold"
         dy="25"
-        x="-463.13629">CAL_DESC_2</tspan>
+        x="-463.13629"><![CDATA[CAL_DESC_2]]></tspan>
     </text>
     <text
       transform="rotate(-89.4383)"
@@ -144,7 +144,7 @@
         id="svg_6"
         font-weight="bold"
         dy="25"
-        x="-464.55023">CAL_DESC_3</tspan>
+        x="-464.55023"><![CDATA[CAL_DESC_3]]></tspan>
     </text>
     <text
       transform="rotate(-90.274)"
@@ -164,7 +164,7 @@
         id="svg_8"
         font-weight="bold"
         dy="25"
-        x="-468.8869">CAL_DESC_4</tspan>
+        x="-468.8869"><![CDATA[CAL_DESC_4]]></tspan>
     </text>
     <text
       transform="rotate(-90.274)"
@@ -173,7 +173,7 @@
       font-size="29px"
       y="434.22794"
       x="-469.17346"
-      id="text254"
+      id="calendarentry5"
       inkscape:label="calendarentry5">
       <tspan
         id="tspan250"
@@ -185,7 +185,7 @@
         font-weight="bold"
         dy="25"
         x="-469.17346"
-        inkscape:label="tspan252">CAL_DESC_5</tspan>
+        inkscape:label="tspan252"><![CDATA[CAL_DESC_5]]></tspan>
     </text>
     <text
       transform="rotate(-90.274)"
@@ -194,7 +194,7 @@
       font-size="29px"
       y="494.22702"
       x="-469.46002"
-      id="text372"
+      id="calendarentry6"
       inkscape:label="calendarentry6">
       <tspan
         id="tspan368"
@@ -206,7 +206,7 @@
         font-weight="bold"
         dy="25"
         x="-469.46002"
-        inkscape:label="tspan252">CAL_DESC_6</tspan>
+        inkscape:label="tspan252"><![CDATA[CAL_DESC_6]]></tspan>
     </text>
     <text
       transform="rotate(-90.274)"
@@ -215,7 +215,7 @@
       font-size="29px"
       y="554.22675"
       x="-469.74658"
-      id="text383"
+      id="calendarentry7"
       inkscape:label="calendarentry7">
       <tspan
         id="tspan379"
@@ -227,7 +227,7 @@
         font-weight="bold"
         dy="25"
         x="-469.74658"
-        inkscape:label="tspan252">CAL_DESC_7</tspan>
+        inkscape:label="tspan252"><![CDATA[CAL_DESC_7]]></tspan>
     </text>
     <text
       transform="rotate(-90.274)"
@@ -236,7 +236,7 @@
       font-size="29px"
       y="612.22675"
       x="-470.02359"
-      id="text392"
+      id="calendarentry8"
       inkscape:label="calendarentry8">
       <tspan
         id="tspan388"
@@ -248,7 +248,28 @@
         font-weight="bold"
         dy="25"
         x="-470.02359"
-        inkscape:label="tspan252">CAL_DESC_8</tspan>
+        inkscape:label="tspan252"><![CDATA[CAL_DESC_8]]></tspan>
+    </text>
+    <text
+      transform="rotate(-90.274)"
+      text-anchor="beginning"
+      font-family="sans-serif"
+      font-size="29px"
+      y="672.22675"
+      x="-470.31015"
+      id="calendarentry9"
+      inkscape:label="calendarentry9">
+      <tspan
+        id="tspan394"
+        font-size="25px"
+        dy="25"
+        x="-470.31015">CAL_DATETIME_9</tspan>
+      <tspan
+        id="tspan396"
+        font-weight="bold"
+        dy="25"
+        x="-470.31015"
+        inkscape:label="tspan252"><![CDATA[CAL_DESC_9]]></tspan>
     </text>
     <text
       font-family="sans-serif"
@@ -276,26 +297,5 @@
       x="-479.67682"
       id="texttime"
       transform="rotate(-90)">TIME_NOW</text>
-    <text
-      transform="rotate(-90.274)"
-      text-anchor="beginning"
-      font-family="sans-serif"
-      font-size="29px"
-      y="672.22675"
-      x="-470.31015"
-      id="text398"
-      inkscape:label="calendarentry9">
-      <tspan
-        id="tspan394"
-        font-size="25px"
-        dy="25"
-        x="-470.31015">CAL_DATETIME_9</tspan>
-      <tspan
-        id="tspan396"
-        font-weight="bold"
-        dy="25"
-        x="-470.31015"
-        inkscape:label="tspan252">CAL_DESC_9</tspan>
-    </text>
   </g>
 </svg>
