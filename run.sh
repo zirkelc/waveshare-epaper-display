@@ -1,5 +1,5 @@
 #!/bin/sh
-. env.sh
+sh ./env.sh
 
 log() {
     echo "---------------------------------------"
@@ -24,7 +24,7 @@ fi
 
 log "Export to PNG"
 
-if [ $WAVESHARE_EPD75_VERSION = 1 ]; then
+if [ "$WAVESHARE_EPD75_VERSION" = 1 ]; then
     WAVESHARE_WIDTH=640
     WAVESHARE_HEIGHT=384
 else
