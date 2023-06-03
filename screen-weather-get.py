@@ -188,7 +188,7 @@ def main():
     alert_message = format_alert_description(alert_message)
 
     time_now = get_formatted_time(datetime.datetime.now())
-    time_now_font_size = "40px"
+    # time_now_font_size = "40px"
 
     # if len(time_now) > 6:
     #     time_now_font_size = str(100 - (len(time_now)-5) * 5) + "px"
@@ -199,7 +199,7 @@ def main():
         "ICON_ONE": weather["icon"],
         "WEATHER_DESC_1": weather_desc[1],
         "WEATHER_DESC_2": weather_desc[2],
-        "TIME_NOW_FONT_SIZE": time_now_font_size,
+        # "TIME_NOW_FONT_SIZE": time_now_font_size,
         "TIME_NOW": time_now,
         "HOUR_NOW": datetime.datetime.now().strftime("%-I %p"),
         "DAY_ONE": datetime.datetime.now().strftime("%b %-d, %Y"),

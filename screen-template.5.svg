@@ -24,12 +24,12 @@
     showgrid="false"
     showguides="true"
     inkscape:zoom="1.5575"
-    inkscape:cx="404.81541"
-    inkscape:cy="230.17657"
+    inkscape:cx="299.51846"
+    inkscape:cy="166.61316"
     inkscape:window-width="1888"
     inkscape:window-height="1135"
-    inkscape:window-x="3210"
-    inkscape:window-y="288"
+    inkscape:window-x="2119"
+    inkscape:window-y="140"
     inkscape:window-maximized="0"
     inkscape:current-layer="g85">
     <sodipodi:guide
@@ -63,10 +63,10 @@
     <text
       text-anchor="middle"
       font-family="sans-serif"
-      x="-115.31744"
+      x="-109.53895"
       font-size="38px"
       id="temphighlow"
-      y="100.75658"
+      y="79.568771"
       transform="rotate(-90)">HIGH_ONE/LOW_ONE</text>
     <text
       transform="rotate(-90.274)"
@@ -279,23 +279,25 @@
       y="43.369137"
       x="-373.98599"
       id="textday"
-      transform="rotate(-90)">DAY_NAME</text>
+      transform="rotate(-90)"
+      style="display:none">DAY_NAME</text>
     <text
       font-family="sans-serif"
       font-size="40px"
       text-anchor="middle"
       y="39.39917"
-      x="-160.06223"
+      x="-102.49242"
       id="textdate"
       transform="rotate(-90)">DAY_ONE</text>
     <text
       text-anchor="beginning"
       font-family="sans-serif"
       font-weight="bold"
-      font-size="TIME_NOW_FONT_SIZE"
-      y="115.15989"
-      x="-479.67682"
+      font-size="40px"
+      y="39.175938"
+      x="-467.55164"
       id="texttime"
-      transform="rotate(-90)">TIME_NOW</text>
+      transform="rotate(-90)">
+      TIME_NOW</text>
   </g>
 </svg>
