@@ -25,7 +25,7 @@
      showguides="true"
      inkscape:zoom="0.96102398"
      inkscape:cx="392.81018"
-     inkscape:cy="139.43461"
+     inkscape:cy="228.92249"
      inkscape:window-width="1390"
      inkscape:window-height="916"
      inkscape:window-x="0"
@@ -59,7 +59,9 @@
        width="800" />
     <g
        id="currentweather"
-       transform="scale(1.2) translate(75 165)" />
+       transform="matrix(1.2,0,0,1.2,90,198)"
+       style="display:inline"
+       inkscape:label="currentweather" />
     <text
        text-anchor="middle"
        font-family="sans-serif"
@@ -266,8 +268,8 @@
        font-family="sans-serif"
        font-weight="bold"
        font-size="TIME_NOW_FONT_SIZE"
-       y="32.13538"
-       x="-322.76593"
+       y="66.473755"
+       x="-466.36276"
        id="texttime"
        transform="rotate(-90)"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:32px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">TIME_NOW</text>
@@ -275,8 +277,8 @@
        font-family="sans-serif"
        font-size="40px"
        text-anchor="middle"
-       y="99.994804"
-       x="-371.9155"
+       y="117.68427"
+       x="-241.8459"
        id="text999"
        transform="rotate(-90)"
        inkscape:label="cooks">The Cooks</text>
@@ -287,5 +289,12 @@
        height="477.66299"
        x="120.54236"
        y="1.040558" />
+    <text
+       id="weatherdesc1"
+       x="-95.910454"
+       y="61.380913"
+       font-size="38px"
+       style="font-size:28px;line-height:0%;font-family:sans-serif;text-anchor:middle"
+       transform="rotate(-90)">WEATHER_DESC_1</text>
   </g>
 </svg>
