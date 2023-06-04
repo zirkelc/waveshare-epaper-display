@@ -17,7 +17,7 @@ from babel.dates import format_time
 
 def configure_locale():
     try:
-        locale.setlocale(locale.LC_ALL, '')
+        locale.setlocale(locale.LC_ALL, "")
     except locale.Error:
         logging.debug("Could not set locale")
 
@@ -55,16 +55,17 @@ def update_svg(template_svg_filename, output_svg_filename, output_dict):
     Writes the output to `output_svg_filename`
     """
     # replace tags with values in SVG
-    output = codecs.open(template_svg_filename, 'r', encoding='utf-8').read()
+    output = codecs.open(template_svg_filename, "r", encoding="utf-8").read()
 
     for output_key in output_dict:
-        logging.debug("update_svg() - {} -> {}"
-                      .format(output_key, output_dict[output_key]))
+        logging.debug(
+            "update_svg() - {} -> {}".format(output_key, output_dict[output_key])
+        )
         output = output.replace(output_key, output_dict[output_key])
 
     logging.debug("update_svg() - Write to SVG {}".format(output_svg_filename))
 
-    codecs.open(output_svg_filename, 'w', encoding='utf-8').write(output)
+    codecs.open(output_svg_filename, "w", encoding="utf-8").write(output)
 
 
 def is_stale(filepath, ttl):
@@ -74,12 +75,10 @@ def is_stale(filepath, ttl):
     """
 
     verdict = True
-    if (os.path.isfile(filepath)):
+    if os.path.isfile(filepath):
         verdict = time.time() - os.path.getmtime(filepath) > ttl
 
-    logging.debug(
-        "is_stale({}) - {}"
-        .format(filepath, str(verdict)))
+    logging.debug("is_stale({}) - {}".format(filepath, str(verdict)))
 
     return verdict
 
@@ -92,14 +91,14 @@ def get_json_from_url(url, headers, cache_file_name, ttl):
     """
     response_json = False
 
-    if (is_stale(cache_file_name, ttl)):
+    if is_stale(cache_file_name, ttl):
         logging.info("Cache file is stale. Fetching from source.")
         try:
             response = requests.get(url, headers=headers)
             response.raise_for_status()
             response_data = response.text
             response_json = json.loads(response_data)
-            with open(cache_file_name, 'w') as text_file:
+            with open(cache_file_name, "w") as text_file:
                 json.dump(response_json, text_file, indent=4)
         except Exception as error:
             logging.error(error)
@@ -108,7 +107,7 @@ def get_json_from_url(url, headers, cache_file_name, ttl):
             raise
     else:
         logging.info("Found in cache.")
-        with open(cache_file_name, 'r') as file:
+        with open(cache_file_name, "r") as file:
             return json.loads(file.read())
     return response_json
 
@@ -121,14 +120,14 @@ def get_xml_from_url(url, headers, cache_file_name, ttl):
     """
     logging.info(url)
 
-    if (is_stale(cache_file_name, ttl)):
+    if is_stale(cache_file_name, ttl):
         logging.info("Cache file is stale. Fetching from source.")
         try:
             response = requests.get(url, headers=headers)
             response.raise_for_status()
             response_data = response.text
 
-            with open(cache_file_name, 'w') as text_file:
+            with open(cache_file_name, "w") as text_file:
                 text_file.write(response_data)
         except Exception as error:
             logging.error(error)
@@ -137,7 +136,7 @@ def get_xml_from_url(url, headers, cache_file_name, ttl):
             raise
     else:
         logging.info("Found in cache.")
-        with open(cache_file_name, 'r') as file:
+        with open(cache_file_name, "r") as file:
             response_data = file.read()
     response_xml = ET.fromstring(response_data)
     return response_xml
@@ -145,7 +144,8 @@ def get_xml_from_url(url, headers, cache_file_name, ttl):
 
 def get_formatted_time(dt):
     try:
-        formatted_time = format_time(dt, format='short', locale=locale.getlocale()[0])
+        # formatted_time = format_time(dt, format='short', locale=locale.getlocale()[0])
+        formatted_time = format_time(dt, format="short", locale="de_DE")
     except Exception:
         logging.debug("Locale not found for Babel library.")
         formatted_time = dt.strftime("%-I:%M %p")
@@ -153,10 +153,10 @@ def get_formatted_time(dt):
 
 
 def get_formatted_date(dt, include_time=True):
-    today = datetime.datetime.today()
-    yesterday = today - datetime.timedelta(days=1)
-    tomorrow = today + datetime.timedelta(days=1)
-    next_week = today + datetime.timedelta(days=7)
+    # today = datetime.datetime.today()
+    # yesterday = today - datetime.timedelta(days=1)
+    # tomorrow = today + datetime.timedelta(days=1)
+    # next_week = today + datetime.timedelta(days=7)
     formatter_day = "%a %b %-d"
 
     # Display the time in the locale format, if possible
@@ -170,20 +170,22 @@ def get_formatted_date(dt, include_time=True):
         short_locale = short_locale.split("_")[0]  # en
         if not short_locale == "en":
             humanize.activate(short_locale)
-        has_locale = True
+        # has_locale = True
     except Exception:
         logging.debug("Locale not found for humanize")
-        has_locale = False
+        # has_locale = False
 
-    if (has_locale and
-            (dt.date() == today.date()
-             or dt.date() == tomorrow.date()
-             or dt.date() == yesterday.date())):
-        # Show today/tomorrow/yesterday if available
-        formatter_day = humanize.naturalday(dt.date(), "%A").title()
-    elif dt.date() < next_week.date():
-        # Just show the day name if it's in the next few days
-        formatter_day = "%A"
+    # if has_locale and (
+    #     dt.date() == today.date()
+    #     or dt.date() == tomorrow.date()
+    #     or dt.date() == yesterday.date()
+    # ):
+    #     # Show today/tomorrow/yesterday if available
+    #     formatter_day = humanize.naturalday(dt.date(), "%A").title()
+    # elif dt.date() < next_week.date():
+
+    # Just show the day name if it's in the next few days
+    formatter_day = "%A"
     return dt.strftime(formatter_day + " " + formatted_time)
 
 
@@ -196,4 +198,4 @@ def get_sunset_time():
     dt = datetime.datetime.now(pytz.utc)
     city = LocationInfo(location_lat, location_long)
     s = sun(city.observer, date=dt)
-    return s['sunset']
+    return s["sunset"]
