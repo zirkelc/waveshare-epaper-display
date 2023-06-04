@@ -63,11 +63,12 @@
     <text
        text-anchor="middle"
        font-family="sans-serif"
-       x="-68.957237"
+       x="-54.957237"
        font-size="38px"
        id="temphighlow"
-       y="37.946503"
-       transform="rotate(-90)">HIGH_ONE/LOW_ONE</text>
+       y="33.946503"
+       transform="rotate(-90)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-anchor:middle">HIGH_ONE/LOW_ONE</text>
     <text
        transform="rotate(-90.274)"
        text-anchor="beginning"
@@ -255,20 +256,21 @@
        font-family="sans-serif"
        font-size="40px"
        text-anchor="middle"
-       y="39.642509"
-       x="-371.9155"
+       y="33.642509"
+       x="-391.9155"
        id="textdate"
-       transform="rotate(-90)">DAY_ONE</text>
+       transform="rotate(-90)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-anchor:middle">DAY_ONE</text>
     <text
        text-anchor="beginning"
        font-family="sans-serif"
        font-weight="bold"
        font-size="TIME_NOW_FONT_SIZE"
-       y="38.13538"
-       x="-344.76593"
+       y="32.13538"
+       x="-322.76593"
        id="texttime"
        transform="rotate(-90)"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">TIME_NOW</text>
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:32px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">TIME_NOW</text>
     <text
        font-family="sans-serif"
        font-size="40px"
