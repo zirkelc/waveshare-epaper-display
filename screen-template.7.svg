@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="800"
+   width="480"
+   version="1.1"
+   id="svg3095"
+   inkscape:version="1.2.2 (b0a84865, 2022-12-01)"
+   sodipodi:docname="screen-template.7.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+   <defs
+      id="defs90" />
+   <sodipodi:namedview
+      id="namedview88"
+      pagecolor="#ffffff"
+      bordercolor="#000000"
+      borderopacity="0.25"
+      inkscape:showpageshadow="2"
+      inkscape:pageopacity="0.0"
+      inkscape:pagecheckerboard="0"
+      inkscape:deskcolor="#d1d1d1"
+      showgrid="false"
+      showguides="true"
+      inkscape:zoom="0.96102398"
+      inkscape:cx="237.76722"
+      inkscape:cy="197.18551"
+      inkscape:window-width="1686"
+      inkscape:window-height="1387"
+      inkscape:window-x="3198"
+      inkscape:window-y="25"
+      inkscape:window-maximized="0"
+      inkscape:current-layer="g85">
+      <sodipodi:guide
+         position="364.04494,13.868379"
+         orientation="0,-1"
+         id="guide377"
+         inkscape:locked="false" />
+      <sodipodi:guide
+         position="789.72713,140.99518"
+         orientation="1,0"
+         id="guide406"
+         inkscape:locked="false" />
+      <sodipodi:guide
+         position="10.272873,142.27929"
+         orientation="1,0"
+         id="guide462"
+         inkscape:locked="false" />
+      <sodipodi:guide
+         position="124.86681,619.43461"
+         orientation="1,0"
+         id="guide395"
+         inkscape:locked="false" />
+      <sodipodi:guide
+         position="360.03264,790.63499"
+         orientation="0,-1"
+         id="guide1584"
+         inkscape:locked="false" />
+   </sodipodi:namedview>
+   <g
+      id="g85">
+      <title
+         id="title63">Layer 1</title>
+      <rect
+         fill="white"
+         id="rect3855"
+         height="800"
+         width="480" />
+      <text
+         text-anchor="beginning"
+         font-family="sans-serif"
+         x="8.3244543"
+         font-size="25px"
+         id="calendarentry1"
+         y="70.987282">
+         <tspan
+            x="8.3244543"
+            id="tspan1319">CAL_EVENTS</tspan>
+      </text>
+      <text
+         text-anchor="beginning"
+         font-family="sans-serif"
+         x="9.8421736"
+         font-size="38px"
+         id="calendarentry1-6"
+         y="37.030228"
+         inkscape:label="time">
+         <tspan
+            x="9.8421736"
+            id="tspan1319-8">TIME_NOW</tspan>
+      </text>
+      <g
+         transform="scale(0.5) translate(250 5)"
+         id="currentweather">
+         <use
+            id="currentweathericon"
+            href="icons/WEATHER_ICON_NOW.svg"
+            inkscape:label="currentweathericon" />
+      </g>
+      <text
+         id="temphighlow"
+         x="322.32806"
+         y="36.143509"
+         font-family="sans-serif"
+         text-anchor="middle"
+         font-size="38px">WEATHER_NOW</text>
+   </g>
+</svg>

@@ -21,6 +21,9 @@ from utility import get_formatted_time, update_svg, configure_logging, configure
 import textwrap
 import html
 
+# from dotenv import load_dotenv
+
+# load_dotenv()
 configure_locale()
 configure_logging()
 
@@ -164,7 +167,7 @@ def get_alert_message(location_lat, location_long):
 
 
 def main():
-    template_name = os.getenv("SCREEN_LAYOUT", "1")
+    # template_name = os.getenv("SCREEN_LAYOUT", "1")
     location_lat = os.getenv("WEATHER_LATITUDE", "51.5077")
     location_long = os.getenv("WEATHER_LONGITUDE", "-0.1277")
     weather_format = os.getenv("WEATHER_FORMAT", "CELSIUS")
@@ -182,10 +185,24 @@ def main():
         logging.error("Unable to fetch weather payload. SVG will not be updated.")
         return
 
-    weather_desc = format_weather_description(weather["description"])
+    weather_dict = {}
+    weather = list(weather) if type(weather) == dict else weather
 
-    alert_message = get_alert_message(location_lat, location_long)
-    alert_message = format_alert_description(alert_message)
+    for i, w in enumerate(weather):
+        logging.info(w)
+
+        weather_temp = "{} / {} {}".format(
+            str(round(w["temperatureMin"])), str(round(w["temperatureMax"])), degrees
+        )
+        weather_icon = w["icon"]
+        weather_desc = format_weather_description(w["description"])
+
+        weather_dict["WEATHER_TEMP_" + str(i)] = weather_temp
+        weather_dict["WEATHER_ICON_" + str(i)] = weather_icon
+        weather_dict["WEATHER_DESC_" + str(i)] = weather_desc[1]
+
+    # alert_message = get_alert_message(location_lat, location_long)
+    # alert_message = format_alert_description(alert_message)
 
     time_now = get_formatted_time(datetime.datetime.now())
     # time_now_font_size = "40px"
@@ -194,27 +211,34 @@ def main():
     #     time_now_font_size = str(100 - (len(time_now)-5) * 5) + "px"
 
     output_dict = {
-        "LOW_ONE": "{}{}".format(str(round(weather["temperatureMin"])), degrees),
-        "HIGH_ONE": "{}{}".format(str(round(weather["temperatureMax"])), degrees),
-        "ICON_ONE": weather["icon"],
-        "WEATHER_DESC_1": weather_desc[1],
-        "WEATHER_DESC_2": weather_desc[2],
+        # "LOW_ONE": "{}{}".format(str(round(weather["temperatureMin"])), degrees),
+        # "HIGH_ONE": "{}{}".format(str(round(weather["temperatureMax"])), degrees),
+        # "ICON_ONE": weather["icon"],
+        # "WEATHER_DESC_1": weather_desc[1],
+        # "WEATHER_DESC_2": weather_desc[2],
         # "TIME_NOW_FONT_SIZE": time_now_font_size,
+        "WEATHER_ICON_NOW": weather_dict["WEATHER_ICON_0"],
+        "WEATHER_NOW": "{} {}".format(
+            weather_dict["WEATHER_TEMP_0"], weather_dict["WEATHER_DESC_0"]
+        ),
         "TIME_NOW": time_now,
         "HOUR_NOW": datetime.datetime.now().strftime("%H:%M"),
         "DAY_ONE": datetime.datetime.now().strftime("%d.%m.%Y"),
         "DAY_NAME": datetime.datetime.now().strftime("%A"),
-        "ALERT_MESSAGE_VISIBILITY": "visible" if alert_message else "hidden",
-        "ALERT_MESSAGE": alert_message,
+        # "ALERT_MESSAGE_VISIBILITY": "visible" if alert_message else "hidden",
+        # "ALERT_MESSAGE": alert_message,
     }
+    output_dict.update(weather_dict)
 
     logging.info(output_dict)
 
     logging.info("Updating SVG")
 
-    template_svg_filename = f"screen-template.{template_name}.svg"
+    # template_svg_filename = f"screen-template.{template_name}.svg"
+    # output_svg_filename = "screen-output-weather.svg"
+    # update_svg(template_svg_filename, output_svg_filename, output_dict)
     output_svg_filename = "screen-output-weather.svg"
-    update_svg(template_svg_filename, output_svg_filename, output_dict)
+    update_svg(output_svg_filename, output_svg_filename, output_dict)
 
 
 if __name__ == "__main__":

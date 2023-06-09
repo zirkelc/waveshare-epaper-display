@@ -8,6 +8,7 @@ from calendar_providers.google import GoogleCalendar
 from calendar_providers.ics import ICSCalendar
 from calendar_providers.outlook import OutlookCalendar
 from utility import (
+    get_formatted_day,
     get_formatted_time,
     update_svg,
     configure_logging,
@@ -37,47 +38,77 @@ ics_calendar_url = os.getenv("ICS_CALENDAR_URL", None)
 ttl = float(os.getenv("CALENDAR_TTL", 1 * 60 * 60))
 
 
-def get_formatted_calendar_events(fetched_events: list[CalendarEvent]) -> dict:
-    formatted_events = {}
-    event_count = len(fetched_events)
+def get_calendar_days() -> dict:
+    days = {}
+    day = datetime.date.today()
+    for index in range(5):
+        days["CAL_DAY_" + str(index)] = get_formatted_day(day)
+        day = day + datetime.timedelta(days=1)
 
-    for index in range(max_event_results):
-        event_label_id = str(index)
-        if index <= event_count - 1:
-            formatted_events["CAL_DATETIME_" + event_label_id] = get_datetime_formatted(
-                fetched_events[index].start,
-                fetched_events[index].end,
-                fetched_events[index].all_day_event,
-            )
-            formatted_events["CAL_DESC_" + event_label_id] = fetched_events[
-                index
-            ].summary
-        else:
-            formatted_events["CAL_DATETIME_" + event_label_id] = ""
-            formatted_events["CAL_DESC_" + event_label_id] = ""
+    return days
 
-    return formatted_events
+
+def get_day_svg(day: datetime.date, index: int) -> str:
+    return (
+        '<tspan x="0" dy="1em" font-weight="bold">'
+        + get_formatted_day(day)
+        + " (WEATHER_TEMP_"
+        + str(index)
+        + " WEATHER_DESC_"
+        + str(index)
+        + ")"
+        + "</tspan>"
+    )
+
+
+def get_empty_svg() -> str:
+    return '<tspan x="0" dy="1em" font-weight="bold"></tspan>'
+
+
+def get_event_svg(event: CalendarEvent) -> str:
+    date = (
+        get_time_formatted(
+            event.start,
+            event.end,
+            event.all_day_event,
+        )
+        if not event.all_day_event
+        else ""
+    )
+
+    return (
+        '<tspan x="0" dy="1em"><![CDATA[' + event.summary + " " + date + "]]></tspan>"
+    )
+
+
+def get_formatted_calendar_events(fetched_events: list[CalendarEvent]) -> str:
+    tspans = []
+    day = datetime.date.today()
+
+    for index in range(5):
+        tspans.append(get_day_svg(day, index))
+
+        for event in fetched_events:
+            if event.start.date() <= day <= event.end.date():
+                tspans.append(get_event_svg(event))
+
+        day = day + datetime.timedelta(days=1)
+        tspans.append(get_empty_svg())
+
+    return (
+        '<text text-anchor="beginning" font-family="sans-serif" font-size="25px">'
+        + "".join(tspans)
+        + "</text>"
+    )
 
 
 # def get_formatted_calendar_events(fetched_events: list[CalendarEvent]) -> dict:
 #     formatted_events = {}
 #     event_count = len(fetched_events)
 
-#     for day in range(1, 5):
-#         for event in range(1, 5):
-#             formatted_events["CAL_DATETIME_" + str(day) + "_" + str(event)] = ""
-#             formatted_events["CAL_DESC_" + str(day) + "_" + str(event)] = ""
-
-#     # get date of today
-#     today = datetime.date.today()
-
 #     for index in range(max_event_results):
-#         event_label_id = str(index + 1)
-
+#         event_label_id = str(index)
 #         if index <= event_count - 1:
-#             # get the distance for today to fetched_events[index].start in days
-#             distance = str((fetched_events[index].start.date() - today).days + 1)
-
 #             formatted_events["CAL_DATETIME_" + event_label_id] = get_datetime_formatted(
 #                 fetched_events[index].start,
 #                 fetched_events[index].end,
@@ -86,17 +117,9 @@ def get_formatted_calendar_events(fetched_events: list[CalendarEvent]) -> dict:
 #             formatted_events["CAL_DESC_" + event_label_id] = fetched_events[
 #                 index
 #             ].summary
-
-#             formatted_events[
-#                 "CAL_DATETIME_" + distance + "_" + event_label_id
-#             ] = get_datetime_formatted(
-#                 fetched_events[index].start,
-#                 fetched_events[index].end,
-#                 fetched_events[index].all_day_event,
-#             )
-#             formatted_events[
-#                 "CAL_DESC_" + distance + "_" + event_label_id
-#             ] = fetched_events[index].summary
+#         else:
+#             formatted_events["CAL_DATETIME_" + event_label_id] = ""
+#             formatted_events["CAL_DESC_" + event_label_id] = ""
 
 #     return formatted_events
 
@@ -121,6 +144,33 @@ def get_datetime_formatted(event_start, event_end, is_all_day_event):
         else:
             start_formatted = get_formatted_date(start_date)
             end_formatted = get_formatted_date(end_date)
+        day = "{} - {}".format(start_formatted, end_formatted)
+    else:
+        day = ""
+    return day
+
+
+def get_time_formatted(event_start, event_end, is_all_day_event):
+    if is_all_day_event or type(event_start) == datetime.date:
+        day = ""
+        # start = datetime.datetime.combine(event_start, datetime.time.min)
+        # end = datetime.datetime.combine(event_end, datetime.time.min)
+
+        # start_day = get_formatted_date(start, include_time=False)
+        # end_day = get_formatted_date(end, include_time=False)
+        # if start == end:
+        #     day = start_day
+        # else:
+        #     day = "{} - {}".format(start_day, end_day)
+    elif type(event_start) == datetime.datetime:
+        start_date = event_start
+        end_date = event_end
+        if start_date.date() == end_date.date():
+            start_formatted = get_formatted_time(start_date)
+            end_formatted = get_formatted_time(end_date)
+        else:
+            start_formatted = get_formatted_time(start_date)
+            end_formatted = get_formatted_time(end_date)
         day = "{} - {}".format(start_formatted, end_formatted)
     else:
         day = ""
@@ -167,12 +217,24 @@ def main():
         )
 
     calendar_events = provider.get_calendar_events()
-    output_dict = get_formatted_calendar_events(calendar_events)
+
+    formatted_events = get_formatted_calendar_events(calendar_events)
+
+    output_dict = {
+        "CAL_EVENTS": formatted_events,
+    }
+    # output_dict.update(get_calendar_days())
+    # output_dict.update()
 
     logging.info("main() - {}".format(output_dict))
 
     logging.info("Updating SVG")
-    update_svg(output_svg_filename, output_svg_filename, output_dict)
+
+    template_name = os.getenv("SCREEN_LAYOUT", "1")
+    template_svg_filename = f"screen-template.{template_name}.svg"
+    output_svg_filename = "screen-output-weather.svg"
+    update_svg(template_svg_filename, output_svg_filename, output_dict)
+    # update_svg(output_svg_filename, output_svg_filename, output_dict)
 
 
 if __name__ == "__main__":

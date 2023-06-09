@@ -189,6 +189,20 @@ def get_formatted_date(dt, include_time=True):
     return dt.strftime(formatter_day + " " + formatted_time)
 
 
+def get_formatted_day(dt):
+    try:
+        short_locale = locale.getlocale()[0]  # en_GB
+        short_locale = short_locale.split("_")[0]  # en
+        if not short_locale == "en":
+            humanize.activate(short_locale)
+        # has_locale = True
+    except Exception:
+        logging.debug("Locale not found for humanize")
+        # has_locale = False
+
+    return dt.strftime("%A, %d.%m.%Y")
+
+
 def get_sunset_time():
     """
     Return the time at which darkness begins, aka 'tonight'
