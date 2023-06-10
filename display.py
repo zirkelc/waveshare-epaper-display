@@ -38,7 +38,7 @@ try:
     logging.debug("Read image file: " + filename)
     Himage = Image.open(filename)
     # rotate image 90 degrees counter clockwise
-    Himage = Himage.rotate(90)
+    # Himage = Himage.rotate(90)
 
     logging.info("Display image file on screen")
 
