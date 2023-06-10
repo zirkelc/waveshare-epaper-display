@@ -52,6 +52,8 @@ def get_day_svg(day: datetime.date, index: int) -> str:
     return (
         '<tspan x="0" dy="1em" font-weight="bold">'
         + get_formatted_day(day)
+        + "</tspan>"
+        + "<tspan>"
         + " (WEATHER_TEMP_"
         + str(index)
         + " WEATHER_DESC_"

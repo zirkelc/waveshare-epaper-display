@@ -70,25 +70,21 @@
       <text
          text-anchor="beginning"
          font-family="sans-serif"
-         x="8.3244543"
+         x="0"
          font-size="25px"
          id="calendarentry1"
-         y="70.987282">
-         <tspan
-            x="8.3244543"
-            id="tspan1319">CAL_EVENTS</tspan>
+         y="70">
+         CAL_EVENTS
       </text>
       <text
          text-anchor="beginning"
          font-family="sans-serif"
-         x="9.8421736"
+         x="0"
          font-size="38px"
          id="calendarentry1-6"
-         y="37.030228"
+         y="37"
          inkscape:label="time">
-         <tspan
-            x="9.8421736"
-            id="tspan1319-8">TIME_NOW</tspan>
+         TIME_NOW
       </text>
       <g
          transform="scale(0.5) translate(250 5)"
@@ -100,8 +96,8 @@
       </g>
       <text
          id="temphighlow"
-         x="322.32806"
-         y="36.143509"
+         x="322"
+         y="37"
          font-family="sans-serif"
          text-anchor="middle"
          font-size="38px">WEATHER_NOW</text>

@@ -191,7 +191,7 @@ def main():
     for i, w in enumerate(weather):
         logging.info(w)
 
-        weather_temp = "{} / {} {}".format(
+        weather_temp = "{}/{}{}".format(
             str(round(w["temperatureMin"])), str(round(w["temperatureMax"])), degrees
         )
         weather_icon = w["icon"]
