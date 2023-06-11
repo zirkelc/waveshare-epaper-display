@@ -1,3 +1,4 @@
+import datetime
 import logging
 from weather_providers.base_provider import BaseWeatherProvider
 
@@ -102,6 +103,9 @@ class Climacell(BaseWeatherProvider):
         location_latlong = "{0:.2f},{1:.2f}".format(
             float(self.location_lat), float(self.location_long)
         )
+
+        # End time is now + 7 days
+        # endTime = (datetime.datetime.now() + datetime.timedelta(days=7)).isoformat()
 
         url = (
             "https://data.climacell.co/v4/timelines"

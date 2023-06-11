@@ -23,7 +23,7 @@ configure_locale()
 configure_logging()
 
 # note: increasing this will require updates to the SVG template to accommodate more events
-max_event_results = 10
+max_event_results = 15
 
 google_calendar_id = os.getenv("GOOGLE_CALENDAR_ID", "primary")
 outlook_calendar_id = os.getenv("OUTLOOK_CALENDAR_ID", None)
@@ -36,16 +36,6 @@ caldav_calendar_id = os.getenv("CALDAV_CALENDAR_ID", None)
 ics_calendar_url = os.getenv("ICS_CALENDAR_URL", None)
 
 ttl = float(os.getenv("CALENDAR_TTL", 1 * 60 * 60))
-
-
-def get_calendar_days() -> dict:
-    days = {}
-    day = datetime.date.today()
-    for index in range(5):
-        days["CAL_DAY_" + str(index)] = get_formatted_day(day)
-        day = day + datetime.timedelta(days=1)
-
-    return days
 
 
 def get_day_svg(day: datetime.date, index: int) -> str:
@@ -87,7 +77,7 @@ def get_formatted_calendar_events(fetched_events: list[CalendarEvent]) -> str:
     tspans = []
     day = datetime.date.today()
 
-    for index in range(5):
+    for index in range(6):  # 6 days
         tspans.append(get_day_svg(day, index))
 
         for event in fetched_events:

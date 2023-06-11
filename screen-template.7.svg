@@ -82,7 +82,7 @@
          x="0"
          font-size="38px"
          id="calendarentry1-6"
-         y="37"
+         y="40"
          inkscape:label="time">
          TIME_NOW
       </text>
@@ -97,7 +97,7 @@
       <text
          id="temphighlow"
          x="322"
-         y="37"
+         y="40"
          font-family="sans-serif"
          text-anchor="middle"
          font-size="38px">WEATHER_NOW</text>
